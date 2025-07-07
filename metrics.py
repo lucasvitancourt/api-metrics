@@ -4,6 +4,10 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)  # Permite requisições de qualquer origem (ideal para testes locais/front-end separado)
 
+@app.route('/')
+def health():
+    return jsonify({"status": "ok", "message": "API online"})
+
 @app.route('/api/metrics.php')
 @app.route('/api/metrics')
 def metrics():
@@ -23,4 +27,4 @@ def metrics():
     })
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=10000)
